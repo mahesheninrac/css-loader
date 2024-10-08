@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loader</title>
+    <style>
+      /* loader */
+
+      .progress-indicator {
+        bottom: 1.5rem;
+        height: 2.5rem;
+        opacity: 0;
+        pointer-events: none;
+        position: fixed;
+        right: 1.25rem;
+        transition: opacity 0.3s, transform 0.3s;
+        width: 2.5rem;
+        z-index: 1000;
+      }
+
+      .progress-indicator {
+        transform: translate3d(0, 100%, 0);
+      }
+
+      @media (min-width: 51.25em) {
+        .progress-indicator {
+          height: 6.25rem;
+          width: 6.25rem;
+        }
+      }
+
+      .progress-indicator.is-animating {
+        opacity: 1;
+        transform: translateZ(0);
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .progress-indicator.is-animating svg {
+          animation: rotate 2s linear infinite;
+        }
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress-indicator">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle
+          cx="50"
+          cy="50"
+          r="40"
+          stroke="url(#progress_gradient)"
+          stroke-width="20"
+        ></circle>
+        <defs>
+          <linearGradient
+            id="progress_gradient"
+            x1="57"
+            y1="91"
+            x2="19"
+            y2="20"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stop-color="#14355B"></stop>
+            <stop offset="1" stop-color="#3878CD"></stop>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <script>
+      const progressIndicator = document.querySelector(".progress-indicator");
+
+      function showSpinner() {
+        progressIndicator.classList.add("is-animating");
+      }
+
+      showSpinner();
+
+      function hideSpinner() {
+        progressIndicator.classList.remove("is-animating");
+      }
+    </script>
+  </body>
+</html>
